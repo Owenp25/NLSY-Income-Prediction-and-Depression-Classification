@@ -72,7 +72,8 @@ Figure 1.
  it is vital to realize that overfitting could be present since there were so many synthetic minority observations generated
  (about 1800.)
  
-![CM_LOGREG](https://github.com/Owenp25/NLSY-Income-Prediction-and-Depression-Classification/assets/77632947/a58c1a51-1a43-47ff-9697-e9bdb66fc575)
+ ![CM_LOGREG](https://github.com/Owenp25/NLSY-Income-Prediction-and-Depression-Classification/assets/77632947/a58c1a51-1a43-47ff-9697-e9bdb66fc575)
+
 
 Figure 2. 
 
@@ -84,6 +85,7 @@ Figure 2.
  depression, we are not predicting enough people to have symptoms of depression.
 
 ![Naive bayes CM](https://github.com/Owenp25/NLSY-Income-Prediction-and-Depression-Classification/assets/77632947/734fc23d-2c09-4969-a297-bdb7e82630a2)
+
 
 Figure 4.
 
