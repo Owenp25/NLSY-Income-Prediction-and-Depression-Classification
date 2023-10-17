@@ -1,13 +1,74 @@
 # NLSY-Income-Prediction-and-Depression-Classification
 
-This was a final project for a course I took in the spring of 2023. The dataset, The National Longitudinal Survey of Youth (NLSY97), is a large dataset of 8,984 participants born between 1980 and 1984. The survey first took place in 1997 where all participants were living in the United States, then interviews were held annually from 1997 until 2020. Survey participants were allowed to “skip” certain questions, and this is denoted for each question. There is data on mental health, employment, substance use, familial status, and education history. These answers are both numeric and categorical.
+This was a final project for a course I took in the spring of 2023. I have included the introduction and conclusion in this README as well as the analysis and models that I authored. The rest of the project can be found in the full report.
 
 ## Introduction
-In this project we decided to address two main questions. First we examined the relationship between a number of predictors, such as employment, education, household & demographics and symptoms of depression (with classification with levels 0 and 1). Second, we addressed the relationship between respondent related predictors such as employment, education, household & demographics related factors and the income (continuous) of the respondents.
+ Our dataset, The National Longitudinal Survey of Youth (NLSY97), is a large dataset of 8,984 participants born between
+ 1980 and 1984. The survey first took place in 1997 where all participants were living in the United States, then interviews
+ were held annually from 1997 until 2020. Survey participants were allowed to “skip” certain questions, and this is denoted
+ for each question. There is data on mental health, employment, substance use, familial status, and education history. These
+ answers are both numeric and categorical.
+ Our two primary response variables that we are trying to predict with our model are depression and income. There are
+ quite a few questions in the survey relating to depression but we decided to focus on one in particular. It asks the
+ respondent to respond to the statement “I felt depressed” with four response options. We decided to engineer this variable
+ into a binary response variable. We encoded no as a 0 and yes as a 1 for depression. Also, we decided to predict the
+ incomes of respondents for our continuous variable. The question in the survey asks “TOTAL INCOME FROM WAGES
+ ANDSALARYINPASTCALENDARYEAR.”
+ Due to the fact that respondents were able to skip certain questions we had to impute or remove rows with these skips. We
+ decided to set most skips to NA. For the “Valid Skips” we decided to either impute these to a zero or NA depending on the
+ variable where we thought it made sense. After doing these imputations we then kept only complete cases of data and it
+ reduced the number of observations from 8,984 to 4,280. Additionally, because we had so many categorical variables we
+ decided to one hot encode them. In order to avoid the dummy variable trap due to the multicollinearity of the categories
+ within each categorical variable, we included m-1 categories for our models (given m categories.) The left out category
+ can then be considered the reference value. Predictor Variables are listed in the code appendix.
+
+## Research Questions
+ In this project we decided to address two main questions. First we examined the relationship between a number of
+ predictors, such as employment, education, household & demographics and symptoms of depression (with classification
+ with levels 0 and 1). Second, we addressed the relationship between respondent related predictors such as employment,
+ education, household & demographics related factors and the income (continuous) of the respondents.
+
+ ## EDA
+![EDA](https://github.com/Owenp25/NLSY-Income-Prediction-and-Depression-Classification/assets/77632947/0b5caed7-1167-4089-b4d8-ccb06029ff8d)
+
+Found major underrepresentation of respondents categorized as having symptoms of depression. To address the minority class, SMOTE (Systematic Minority Oversampling Technique) was used. 
+This function created synthetic observations based on k nearest neighbors within the minority class. Based on current literature, the optimal choice is to balance the minority and majority classes evenly so this was the goal.
+
+## Analyzing Effect of SMOTE on the data
+
+![Smote vs original](https://github.com/Owenp25/NLSY-Income-Prediction-and-Depression-Classification/assets/77632947/8d517abe-16a0-4dee-a55d-4a78034fa8ff)
+
+As can be seen here, SMOTE created synthetic observations proportionate to the original data in terms of the amount of people categorized as depressed. The change in response counts with SMOTE can be seen in the two images below. 
+
+Original Depression Response Counts
+![table original dep](https://github.com/Owenp25/NLSY-Income-Prediction-and-Depression-Classification/assets/77632947/bbea277f-cbd2-4de0-b1a4-01a750be8ba0)
+
+SMOTE Depression Response Counts
+![smote data balance](https://github.com/Owenp25/NLSY-Income-Prediction-and-Depression-Classification/assets/77632947/ebb3a58f-97ca-43f3-bac4-acdc852bfb1d)
 
 ## Depression Classification
+ 1.
+ Logistic Regression (lasso/ridge)
+ Initially a model predicting depression using all 49 predictor variables (once one hot encoded) was trained and tested but
+ this model only returned one true positive prediction correctly. This is due to there being only 71 people labeled as
+ depressed, which is what we want to predict, versus 4209 people labeled as not depressed. Two problems needed to be
+ addressed: the extreme minority class of respondents labeled as depressed (5-7 days in the past week) and the abundance
+ of unnecessary predictor variables. As mentioned before, SMOTE was used to deal with the minority class. To deal with
+ the abundance of predictors, LASSO regression was implemented. This returned coefficients for the most important
+ variables and set the other predictor variable’s coefficients to zero (Figure 1). Combining these two techniques, a final
+ logistic regression model was built with the subset of important predictors and a balanced sampling of depressed and
+ non-depressed individuals (1846 and 1863, respectively.) This model performed quite well as will be discussed later on.
+
+![LASSO](https://github.com/Owenp25/NLSY-Income-Prediction-and-Depression-Classification/assets/77632947/89f89194-4bee-4061-94f3-6e1ea1152d34)
+Figure 1.
+
+
+
+
 
 ## Income Prediction
+
+These parts were completed by group members and are included in the full report.
 
 ## Conclusion
  Depression:
