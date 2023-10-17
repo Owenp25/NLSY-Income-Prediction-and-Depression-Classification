@@ -40,15 +40,15 @@ This function created synthetic observations based on k nearest neighbors within
 
 As can be seen here, SMOTE created synthetic observations proportionate to the original data in terms of the amount of people categorized as depressed. The change in response counts with SMOTE can be seen in the two images below. 
 
-Original Depression Response Counts
+Original Depression Response Counts:
 ![table original dep](https://github.com/Owenp25/NLSY-Income-Prediction-and-Depression-Classification/assets/77632947/bbea277f-cbd2-4de0-b1a4-01a750be8ba0)
 
-SMOTE Depression Response Counts
+SMOTE Depression Response Counts:
 ![smote data balance](https://github.com/Owenp25/NLSY-Income-Prediction-and-Depression-Classification/assets/77632947/ebb3a58f-97ca-43f3-bac4-acdc852bfb1d)
 
 ## Depression Classification
- 1.
- Logistic Regression (lasso/ridge)
+ 1. Logistic Regression (lasso/ridge)
+
  Initially a model predicting depression using all 49 predictor variables (once one hot encoded) was trained and tested but
  this model only returned one true positive prediction correctly. This is due to there being only 71 people labeled as
  depressed, which is what we want to predict, versus 4209 people labeled as not depressed. Two problems needed to be
@@ -62,9 +62,37 @@ SMOTE Depression Response Counts
 ![LASSO](https://github.com/Owenp25/NLSY-Income-Prediction-and-Depression-Classification/assets/77632947/89f89194-4bee-4061-94f3-6e1ea1152d34)
 Figure 1.
 
+ The logistic regression model using SMOTE had a final accuracy of 78.77% and a recall of 72.73% which were computed
+ from the decision matrix in Figure 2. We care about recall because this is the proportion of respondents truly labeled as
+ depressed that we successfully predicted to be depressed. Further evaluating this model, McFadden’s Pseudo R-Squared
+ was calculated. This value is 0.37 which shows that the model is an excellent fit (lower values are expected for
+ McFadden’s R-squared.) The most important features in this model were not being employed in 2019, being injured 4 or
+ more times in the past year, and household size were the most important variables in this model. Despite this performance,
+ it is vital to realize that overfitting could be present since there were so many synthetic minority observations generated
+ (about 1800.)
+ 
+![CM_LOGREG](https://github.com/Owenp25/NLSY-Income-Prediction-and-Depression-Classification/assets/77632947/a58c1a51-1a43-47ff-9697-e9bdb66fc575)
+Figure 2. 
 
 
+2. Naive Bayes Classifier
 
+ Naive Bayes classifier was relatively accurate with an accuracy score of 72.31%. However, as shown by the confusion
+ matrix in Figure 4, there was a high number of false negatives. This means that out of all actual people with symptoms of
+ depression, we are not predicting enough people to have symptoms of depression.
+
+![Naive bayes CM](https://github.com/Owenp25/NLSY-Income-Prediction-and-Depression-Classification/assets/77632947/734fc23d-2c09-4969-a297-bdb7e82630a2)
+Figure 4.
+
+3. Random Forest Classifier
+
+The final random forest classification model had an extremely high accuracy of 96.34% and a recall of 93.33%. This was
+ trained and tested on the SMOTE data and was our best performing model, however with such a high accuracy this model
+ may be very prone to overfitting. Household size, being injured 4 times in the past year, and weight were the most
+ important variables in this model for predicting depression (figure 3.)
+
+![VarImpPlotRF](https://github.com/Owenp25/NLSY-Income-Prediction-and-Depression-Classification/assets/77632947/937871b4-db5a-4c8c-97b8-0ffe26b68203)
+FIgure 3.
 
 ## Income Prediction
 
