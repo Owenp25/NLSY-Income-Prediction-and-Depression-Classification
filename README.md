@@ -60,6 +60,7 @@ SMOTE Depression Response Counts:
  non-depressed individuals (1846 and 1863, respectively.) This model performed quite well as will be discussed later on.
 
 ![LASSO](https://github.com/Owenp25/NLSY-Income-Prediction-and-Depression-Classification/assets/77632947/89f89194-4bee-4061-94f3-6e1ea1152d34)
+
 Figure 1.
 
  The logistic regression model using SMOTE had a final accuracy of 78.77% and a recall of 72.73% which were computed
@@ -72,6 +73,7 @@ Figure 1.
  (about 1800.)
  
 ![CM_LOGREG](https://github.com/Owenp25/NLSY-Income-Prediction-and-Depression-Classification/assets/77632947/a58c1a51-1a43-47ff-9697-e9bdb66fc575)
+
 Figure 2. 
 
 
@@ -82,6 +84,7 @@ Figure 2.
  depression, we are not predicting enough people to have symptoms of depression.
 
 ![Naive bayes CM](https://github.com/Owenp25/NLSY-Income-Prediction-and-Depression-Classification/assets/77632947/734fc23d-2c09-4969-a297-bdb7e82630a2)
+
 Figure 4.
 
 3. Random Forest Classifier
@@ -92,6 +95,7 @@ The final random forest classification model had an extremely high accuracy of 9
  important variables in this model for predicting depression (figure 3.)
 
 ![VarImpPlotRF](https://github.com/Owenp25/NLSY-Income-Prediction-and-Depression-Classification/assets/77632947/937871b4-db5a-4c8c-97b8-0ffe26b68203)
+
 FIgure 3.
 
 ## Income Prediction
